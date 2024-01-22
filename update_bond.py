@@ -21,11 +21,13 @@ def open_base_file(base_files,after_name):
 fileNames =  ["wiki.servants.1.json",
              "wiki.servants.2.json",
              "wiki.servants.3.json",
-             "wiki.servants.4.json"]
+             "wiki.servants.4.json",
+             "wiki.servants.5.json",]
 baseFiles =[ "servants.1.json",
              "servants.2.json",
              "servants.3.json",
-             "servants.4.json"]
+             "servants.4.json",
+             "servants.5.json"]
 
 #json 文件合并
 open_base_file(baseFiles,"servants.json")
