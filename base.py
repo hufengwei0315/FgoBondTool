@@ -20,17 +20,21 @@ urls =["https://raw.githubusercontent.com/chaldea-center/chaldea-data/main/dist/
        "https://raw.githubusercontent.com/chaldea-center/chaldea-data/main/dist/wiki.servants.2.json",
        "https://raw.githubusercontent.com/chaldea-center/chaldea-data/main/dist/wiki.servants.3.json",
        "https://raw.githubusercontent.com/chaldea-center/chaldea-data/main/dist/wiki.servants.4.json",
+       "https://raw.githubusercontent.com/chaldea-center/chaldea-data/main/dist/wiki.servants.5.json",
        "https://raw.githubusercontent.com/chaldea-center/chaldea-data/main/dist/servants.1.json",
        "https://raw.githubusercontent.com/chaldea-center/chaldea-data/main/dist/servants.2.json",
        "https://raw.githubusercontent.com/chaldea-center/chaldea-data/main/dist/servants.3.json",
-       "https://raw.githubusercontent.com/chaldea-center/chaldea-data/main/dist/servants.4.json"]
+       "https://raw.githubusercontent.com/chaldea-center/chaldea-data/main/dist/servants.4.json",
+       "https://raw.githubusercontent.com/chaldea-center/chaldea-data/main/dist/servants.5.json"]
 fileNames = ["wiki.servants.1.json",
              "wiki.servants.2.json",
              "wiki.servants.3.json",
              "wiki.servants.4.json",
+             "wiki.servants.5.json",
              "servants.1.json",
              "servants.2.json",
              "servants.3.json",
-             "servants.4.json"]
+             "servants.4.json",
+             "servants.5.json"]
 
 saveFile(urls,fileNames)
