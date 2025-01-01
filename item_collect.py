@@ -14,10 +14,11 @@ class SvtData:
         self.bondLeft = bondLeft
         self.treasureDeviceLv1 = treasureDeviceLv1
 class SvtData:
-    def __init__(self,id,svtId,mcLink,skillLv):
+    def __init__(self,id,svtId,mcLink,appendFlag,skillLv):
         self.id = id
         self.svtId = svtId
         self.mcLink = mcLink
+        self.appendFlag = appendFlag
         self.skillLv= skillLv
 
 
@@ -41,23 +42,28 @@ try:
 finally:
     object.close()
 
+servant_data_path = "base/servants.json"
+servant_data_object = open(servant_data_path,encoding="utf-8")
+
+try:
+    servant_data_text = servant_data_object.read()  #结果为str类型
+finally:
+    object.close()
+
 user_dic = json.loads(user_data_text)
 collection = user_dic['cache']['replaced']['userSvt']
 #print(collection)
 #print (type(collection))
+servant_dic = json.loads(servant_data_text)
+
 
 list0 = [];
-list1 = [];
-list2 = [];
-list3 = [];
-list4 = [];
-list5 = [];
 
 collection2 = user_dic['cache']['replaced']['userSvtAppendPassiveSkill']
-print(len(collection2))
+#print(len(collection2))
 
 collection3 = user_dic['cache']['replaced']['userSvtAppendPassiveSkillLv']
-print(len(collection3))
+#print(len(collection3))
 
 
 for key in range (len(collection)):
@@ -91,12 +97,48 @@ for key in range (len(collection)):
      if(idX == svt_id ):
      #if(idX == svt_id ):
       mclink = svt_data[n]['mcLink']
-      cost = svt_data[key2]['cost']
+      cost = svt_data[n]['cost']
       if mclink != "" and cost >=12 :
-          print(mclink+"   "+ str(id) +"\n skill1 "+str(skillLv1)+" skill2 "+str(skillLv2)+" skill3 "+str(skillLv3)+"\n appendskill2 "+str(appendSkillLv2)+" appendskill5 "+str(appendSkillLv5))
-      
-
-
-
-
-
+        #print(mclink+"   " +"\n skill1 "+str(skillLv1)+" skill2 "+str(skillLv2)+" skill3 "+str(skillLv3)+"\n appendskill2 "+str(appendSkillLv2)+" appendskill5 "+str(appendSkillLv5))
+        tinydict ={"id":idX,"svtId":svt_data[n]['collectionNo'],"mcLink":svt_data[n]['mcLink'],"appendFlag":False,"skillLv":skillLv1}
+        list0.append(tinydict)
+        tinydict ={"id":idX,"svtId":svt_data[n]['collectionNo'],"mcLink":svt_data[n]['mcLink'],"appendFlag":False,"skillLv":skillLv2}
+        list0.append(tinydict)
+        tinydict ={"id":idX,"svtId":svt_data[n]['collectionNo'],"mcLink":svt_data[n]['mcLink'],"appendFlag":False,"skillLv":skillLv3}
+        list0.append(tinydict)
+        tinydict ={"id":idX,"svtId":svt_data[n]['collectionNo'],"mcLink":svt_data[n]['mcLink'],"appendFlag":True,"skillLv":appendSkillLv2}
+        list0.append(tinydict)
+        tinydict ={"id":idX,"svtId":svt_data[n]['collectionNo'],"mcLink":svt_data[n]['mcLink'],"appendFlag":True,"skillLv":appendSkillLv5}
+        list0.append(tinydict)
+#print(list0)
+for index in range(len(list0)):
+    svtId = list0[index]['id']
+    level =(int) (list0[index]['skillLv'])
+    appendFlag = list0[index]['appendFlag']
+    #print(svtId)
+    for key2 in range(len (servant_dic)):
+        id = servant_dic[key2]['id']
+        #print(id+" "+svtId)
+        #print(id)
+        #input("Press Enter to continue...")
+        if (id == svtId ):
+            #print(int(id)+" "+svtId)
+            #input("Press Enter to continue...")
+            if( appendFlag == True):
+                skillMaterials = servant_dic[key2]['skillMaterials']
+            else:
+                 skillMaterials = servant_dic[key2]['appendSkillMaterials']
+         
+            if level != 10:
+                for tempLevel in range (len(skillMaterials)-1):
+                    #print(skillMaterials['1'])
+                    #print(tempLevel)
+                    #print(level)
+                    if tempLevel+1 > level :
+                        levelItemList = skillMaterials[str(tempLevel)]
+                        print(levelItemList)
+                        for j in range(len(levelItemList['items'])):
+                            item = levelItemList['items'][j]
+                            print(str(svtId)+" "+str(item['itemId'])+" "+str(item['amount']))
+                            #print(str(item['amount']))
+                    
