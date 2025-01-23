@@ -56,6 +56,9 @@ for key in range (len(base_data)):
     id = base_data[key]['id']
     cost = base_data[key]['cost']
     bond_growth = base_data[key]['bondGrowth']
+    skillMaterials = base_data[key]['skillMaterials']
+    appendSkillMaterials = base_data[key]['appendSkillMaterials']
+    #print(str(skillMaterials))
     mcLink = ''
     for j in range(len(wiki_data)):
         if  int(wiki_data[j]['collectionNo']) == collection_no:
@@ -68,7 +71,7 @@ for key in range (len(base_data)):
         tiny_dict = {"bondPoint":bond_growth[j],"level":num}
         servant_bond_growthList.append(tiny_dict)
     #print(servant_bond_growthList)
-    item_dict = {"idX":id,"collectionNo":collection_no,"cost":cost,"mcLink":mcLink,"servantBondGrowthList":servant_bond_growthList}
+    item_dict = {"idX":id,"collectionNo":collection_no,"cost":cost,"mcLink":mcLink,"servantBondGrowthList":servant_bond_growthList,"skillMaterials":skillMaterials,"appendSkillMaterials":appendSkillMaterials}
     bond_servant.append(item_dict)
 
 

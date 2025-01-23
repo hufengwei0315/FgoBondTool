@@ -120,16 +120,23 @@ def insert_total_excel(list0):
     for j in range(len(itemList)):
         worksheet0.set_row(i-1,30)
         #print(list1[j])
+        image_path = 'base/item/'+itemList[j].itemName+'.jpg'
         try:
-            print("正在下载...."+itemList[j].url)
-            image_data = download_image(itemList[j].url)
-            print("下载完成！ "+itemList[j].itemName)
-            worksheet0.insert_image(i-1,0,f"image_{j+1}.png",
+            if os.path.exists(image_path):
+                 worksheet0.insert_image(i-1,0,image_path,
+                                    {
+                                     "x_scale": 0.25,
+                                    "y_scale": 0.25})
+            else:
+                print("正在下载...."+itemList[j].url)
+                image_data = download_image(itemList[j].url)
+                print("下载完成！ "+itemList[j].itemName)
+                worksheet0.insert_image(i-1,0,f"image_{j+1}.png",
                                     {"image_data":image_data,
                                      "x_scale": 0.25,
                                     "y_scale": 0.25})
         except Exception as e:
-            worksheet0.write(i, 4, f"Error: {e}") 
+            worksheet0.write(i-1, 4, f"Error: {e}") 
         insertData = [ itemList[j].itemName,itemList[j].count,itemList[j].itemId]
         #print(insertData)
         row = 'B' + str(i)
@@ -243,9 +250,3 @@ for j in range(len(total_result)):
             total_result[j]['count'] = total_amount
 
 insert_total_excel(total_result)
-
-
-                                
-
-                            
-                    
